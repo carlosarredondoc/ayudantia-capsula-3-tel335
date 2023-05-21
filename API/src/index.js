@@ -6,6 +6,8 @@ import bodyParser from 'koa-body'
 
 import router from './router/index'
 
+import './database'
+
 const app = new Koa()
 
 const port = 3000
