@@ -3,20 +3,19 @@ import { Products } from "../../models/product"
 import {Op} from 'sequelize'
 
 exports.getProducts = async () => {
-    // Solo se retorna todos los productos directamente del archivo
+    // Solo se retorna todos los productos directamente de la base de datos
     return await Products.findAll()
 }
 
 exports.addProduct = async (productData) => {
-  //Se crea un nuevo objecto de producto con sus respectivos datos, pero id es 1 en caso de que no exista ningun producto dentro del arreglo y en caso de que exista un producto, tomara el ultimo producto obtendra su id y le sumara 1
-    
+  // El ide ahora se crea auto incremental mediante el uso de modelo en la base dedatos  
     let product = await Products.create({  
         nombre: productData.nombre.toLowerCase(),
         precio: productData.precio,
         cantidad: productData.cantidad,
         categorias: productData.categorias.map((categoria)=> categoria.toLowerCase())
     })
-    // Se agrega el producto creado al arreglo
+    // se retorna el producto creado
     return product
 }
 
@@ -32,12 +31,12 @@ exports.getProductsForCategory = async (category) => {
 }
 
 exports.getProductsForCategoryAndOrder = async (category,order) => {
-  // Se realiza el filtrado por categoria
+  // Se realiza el filtrado por categoria y el orden respectivo usando sequelize
   const products_filter =  await Products.findAll({ where: { categorias: { [Op.overlap]: [category.toLowerCase()]  }}, order: [['precio','ASC']] })
   // Se retorna -1 en caso de que no exista la categoria en algun producto
   if (products_filter.length == 0) return -1
 
-  // Se realiza el ordenamiento de menor a mayor a partir del precio de los productos
+  // se define una variable para el ordenamiento
   const productsOrder = products_filter
   //Condicional ascendente o de menor a mayor
   if (order == 'asc'){
@@ -46,18 +45,22 @@ exports.getProductsForCategoryAndOrder = async (category,order) => {
   }else if (order=='desc'){
     //Se realiza un cambio de orden inverso a partir del ascendente ejemplo sencillo [1,2,3] - reverse() -> [3,2,1]
     //return productsOrder.reverse() O
+    //Consulta equivalente para realizar orden descendente
     return await Products.findAll({ where: { categorias: { [Op.overlap]: [category.toLowerCase()]  }}, order: [['precio','DESC']] })
   }
 }
 
 exports.updateProduct = async (productId,productData) => {
+
+  //Buscamos el producto por su id
   let product = await Products.findOne({where: {id: productId }})
 
+  // si el producto existe lo actualizamos con sus respectivos datos
   if (product) {
-    product.nombre = productData.nombre.toLowerCase()
-    product.precio = productData.precio
-    product.cantidad = productData.cantidad
-    product.categorias = productData.categorias.map((categoria)=> categoria.toLowerCase())
+    product.nombre = product.name ? productData.nombre.toLowerCase() : product.name
+    product.precio = productData.precio ? productData.precio : product.precio
+    product.cantidad = productData.cantidad ? productData.cantidad : product.cantidad
+    product.categorias = productData.categorias ? productData.categorias.map((categoria)=> categoria.toLowerCase()) : product.categorias
     await product.save();
   } else {
     return [] // retornamos un elemento vacio, para detectar que dicho id no existe
