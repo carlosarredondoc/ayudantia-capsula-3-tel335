@@ -1,5 +1,12 @@
 version: '3.8'
 services:
+  app:
+    build: ./API/.
+    ports:
+      - 3000:3000
+    depends_on:
+      - postgresqldb
+  
   postgresqldb:
     image: postgres:14.1-alpine
     restart: always

@@ -5,7 +5,8 @@ export const sequelize = new Sequelize(
   "postgres", // username
   "postgres", // password
   {
-    host: "localhost",
+    host: "postgresqldb", //Aplicacion y bd en docker
+    //host: "localhost", //Docker solamente para bd
     port: 5432,
     dialect: "postgres",
     // pool: {
