@@ -8,9 +8,9 @@ Template base, pero modificado: **[Repositorio base](https://github.com/carlosar
 
 Basadas en el **Repositorio base**
 
-Rama **mongodb**: Se utiliza mongoose para realizar la conexion a la respectiva base de datos.
+Rama **mongodb**: Se utiliza [mongoose](https://mongoosejs.com/docs/) para realizar la conexion a la respectiva base de datos.
 
-Rama **postgresql**: Se utiliza sequelize con las dependencias de postgres para realizar la conexion a la respectiva base de datos.
+Rama **postgresql**: Se utiliza [sequelize](https://sequelize.org/docs/v6/getting-started/) con las dependencias de postgres para realizar la conexion a la respectiva base de datos.
 
 # Docker
 ## ¿Que es Docker?
