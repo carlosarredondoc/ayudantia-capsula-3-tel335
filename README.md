@@ -1,8 +1,16 @@
-# Ayudantia 3:  **Docker, Docker Compose y Conexion a la base de datos**
+# Ayudantia 3:  **Docker, Docker Compose, Conexion a la base de datos y Dockerizando aplicacion**
 
 Creado por Carlos Arredondo
 
 Template base, pero modificado: **[Repositorio base](https://github.com/carlosarredondoc/control-1-rest-api-koa)**
+
+## El repositorio contiene 2 ramas
+
+Basadas en el **Repositorio base**
+
+Rama **mongodb**: Se utiliza mongoose para realizar la conexion a la respectiva base de datos.
+
+Rama **postgresql**: Se utiliza sequelize con las dependencias de postgres para realizar la conexion a la respectiva base de datos.
 
 # Docker
 ## ¿Que es Docker?
@@ -11,7 +19,7 @@ Docker es una plataforma la cual permite generar entornos aislados, los cuales s
 
 ## Funcionamiento
 
-Docker utiliza un repositorio llamado [Docker Hub]() el cual contiene imagenes de diferentes aplicaciones, proyectos, sitemas operativos, etc. Estas son archivos que contienen codigo el cual permite instalar, dependencias, realizar configuraciones entre muchas otras cosas.
+Docker utiliza un repositorio llamado [Docker Hub](https://hub.docker.com/search?q=) el cual contiene imagenes de diferentes aplicaciones, proyectos, sitemas operativos, etc. Estas son archivos que contienen codigo el cual permite instalar, dependencias, realizar configuraciones entre muchas otras cosas.
 
 Uno al levantar un contenedor este primero busca en el repositorios de imagenes local, en caso de no existir la descargara de internet, para posteriormente crear el entorno, tambien se pueden tener entornos apagados  para posteriormente iniciar el contenedor y seguir trabajando en algun proyecto.
 
@@ -159,3 +167,4 @@ En la seccion **pgAdmin 4**, seleccione su sistema operativo de preferencia.
 [Cloud Firestore](https://firebase.google.com/docs/firestore?hl=es-419): base de datos NoSQL de Google tiene plan gratuito
 
 Entre otras mas...
+
